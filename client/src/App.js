@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Security, SecureRoute, ImplicitCallback } from "@okta/okta-react";
 
 import Navbar from "./components/layout/Navbar";
@@ -8,6 +8,9 @@ import Login from "./components/auth/Login";
 import PostsManager from "./pages/PostsManager";
 import Admin from "./components/pages/Admin";
 import PostEditor from "./components/PostEditor";
+import Create from "./components/create.component";
+import Edit from "./components/edit.component";
+import Index from "./components/index.component";
 
 // import Leads from "./components/pages/Leads";
 
@@ -36,6 +39,11 @@ class App extends Component {
               <SecureRoute path="/posts" component={PostsManager} />
               <SecureRoute path="/form" exact={true} component={PostEditor} />
               <SecureRoute path="/admin" exact={true} component={Admin} />
+              <Switch>
+                <Route path="/create" exact={true} component={Create} />
+                <Route path="/edit/:id" component={Edit} />
+                <Route path="/leads" component={Index} />
+              </Switch>
               <Route
                 path="/login"
                 render={() => (
